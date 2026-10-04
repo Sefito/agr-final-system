@@ -1,67 +1,57 @@
 # AGR Final System
 
-A new foundation for AGR's assistant, commercial workflows, document explorer and CRM, deployed in each customer's Azure tenant and subscription.
+A mixed Python/TypeScript monorepo for customer-owned Azure deployments of AGR. The runtime architecture remains a modular monolith: packages are code/dependency boundaries, not independently deployed business services.
 
-This repository currently contains a folder scaffold and architectural boundaries. It has no runnable application, installed dependencies, database schema or deployed resources.
+This repository contains design documentation only. Workspace manifests, application code, package builds, lockfiles, CI and Azure resources are not implemented.
 
-## Workspace
+## Structure
 
 ```text
 apps/
-  backend/
-    src/agr/
-      api/                 HTTP and streaming transport
-      runtime/             Configuration, dependency wiring and job entry points
-      modules/
-        identity/          Principals, memberships and access policies
-        documents/         Catalogue, folders, originals, versions and publication
-        retrieval/         Authorized evidence search and citation locators
-        assistant/         Consultation use cases
-        commercial/        Drafting, editing and approval use cases
-        crm/               Commercial records and commands
-        usage/             Usage records and business charge receipts
-      integrations/
-        azure/             Azure resource adapters
-        sharepoint/        Optional source connector
-        models/            Model-provider adapters
-    tests/
-      unit/
-      integration/
-      contracts/
-  web/
-    src/
-      app/                 Application composition, routing and providers
-      features/
-        assistant/
-        commercial/
-        documents/
-        crm/
-      shared/              Reusable presentation components and HTTP client
-    tests/
-db/migrations/             Versioned schema changes
-infra/azure/
-  modules/                 Reusable Bicep resource modules
-  environments/            Synthetic deployment parameter examples
-clients/examples/          Synthetic customer configuration examples
-scripts/                   Development and maintenance commands
-docs/
-  architecture/
-  decisions/
+  api/src/agr_api/             HTTP/SSE transport and composition
+  worker/src/agr_worker/       Recoverable job entry points and composition
+  web/src/                    React application and product features
+packages/
+  access/src/agr_access/      Identity and authorization contracts
+  documents/src/agr_documents/ Catalogue, originals, versions and publication
+  intelligence/src/agr_intelligence/
+    retrieval/               Evidence search and index lifecycle
+    assistant/               Consultation use cases
+  commercial/src/agr_commercial/ Proposals, approvals and workflow coordination
+  crm/src/agr_crm/            Agreed commercial records and shared commands
+  usage/src/agr_usage/        Inference attribution and business receipts
+  adapters/src/agr_adapters/  Concrete persistence, Azure, source and model adapters
+  api-client/                Generated HTTP client and event transport
+  ui/                        Reusable presentation primitives
+contracts/
+  http/                      Reviewed OpenAPI artifacts from API contracts
+  events/                    Language-neutral streaming event specifications
+  fixtures/                  Invented compatibility examples
+tests/system/                Cross-package and application verification
+db/migrations/               One coordinated PostgreSQL schema history
+infra/azure/                 Customer-local Bicep resource design
+clients/examples/            Invented configuration examples
+scripts/                     Workspace maintenance entry points
+docs/                        Architecture and decisions
 ```
 
-Folders belong to one application unless a measured need justifies a separate service. API routes and agent tools invoke the same typed application use cases. Background jobs reuse backend modules.
+Each package/application owns local specifications and planned tests. Every folder has a README. Detailed ownership and allowed dependencies are in the [architecture index](docs/architecture/README.md).
 
-Read [the architecture](docs/architecture/overview.md), [the decision record](docs/decisions/0001-modular-monolith.md) and [the repository contract](AGENTS.md) before implementation.
+## Workspace tooling proposal
 
-## Initial decisions
+- **uv workspace**: Python applications/packages, member manifests and one Python lockfile.
+- **pnpm workspace**: web, API client and UI, member manifests and one JavaScript lockfile.
+- **Nx**: one task graph across both ecosystems; explicit Python/schema dependency edges and reproducible local caching.
+- **Import Linter and TypeScript import restrictions**: enforce public interfaces and forbidden dependency directions. Workspaces alone do not enforce architectural isolation.
 
-- Python backend and a React/TypeScript frontend; dependencies and tool versions will be selected when implementation begins.
-- PostgreSQL with pgvector for business data and initial retrieval. Preserve the existing document identity concepts and provisionally retain platform-file bytes in PostgreSQL with the 25 MiB limit.
-- Customer-owned Azure deployment, with repeatable Bicep provisioning. Deployment federation and optional Lighthouse support access have separate responsibilities.
-- An authorized folder/file explorer and uploads are in scope. SharePoint is an optional integration.
-- LangGraph is not a required dependency. Durable execution must be demonstrated before choosing a workflow engine.
-- Complex document processing is outside the initial scope.
+These tools are recommended, not installed/configured. Exact versions are pinned when implementation begins. No remote build cache or customer-data-bearing cached task is selected.
 
-## Scaffold verification
+## Product boundaries
 
-Git retains otherwise empty folders through `.gitkeep` files. These can be removed when implementation files occupy the folder. No application tests or CI checks exist yet; creating empty test folders does not establish test coverage.
+Preserve document identity and provisionally keep platform bytes in PostgreSQL under the 25 MiB cap. Provide an authorized explorer/uploads; SharePoint is optional. Keep complex-file processing outside initial scope. LangGraph remains optional. Deploy in each customer's tenant/subscription with separate runtime, deployment and support access.
+
+Read the [monorepo design](docs/architecture/monorepo.md), [dependency rules](docs/architecture/package-dependencies.md), [delivery sequence](docs/architecture/delivery-sequence.md), [decision register](docs/decisions/README.md) and [repository contract](AGENTS.md).
+
+## Functional baseline
+
+Read the [functional requirements](docs/requirements/functional-requirements.md) for users, scope, business rules, use cases and acceptance scenarios. First-release CRM is limited to organizations, projects and document attachments. The full requirements document remains a draft for review.

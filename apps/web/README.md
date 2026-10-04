@@ -1,7 +1,9 @@
 # Web application
 
-The intended frontend is React with TypeScript. Tooling, dependencies and runnable commands are not installed yet.
+Status: React/TypeScript host selected; tooling implementation pending.
 
-`src/app/` owns routing and application composition. `src/features/` groups user-facing functionality by product area. `src/shared/` holds reusable presentation components and the typed API client; it does not duplicate backend business policy.
+Own the application shell, authenticated session presentation and assistant/commercial/documents/CRM feature interactions. Depend on public `@agr/api-client` and `@agr/ui`; keep application-specific hooks/state local.
 
-HTTP types should be generated from the backend's implemented contract. Streaming events need their own versioned schema. Scope caches by user and authorization context. Production failures show explicit unavailable states; fictional demonstration data belongs to an explicit demo mode.
+The proposed pnpm workspace owns one JavaScript lockfile across web/client/UI. Nx runs host checks after dependent package/contract tasks. No framework versions, manifests or build tasks are configured yet.
+
+Read [source](src/README.md) and [tests](tests/README.md). UI follows backend versions/approvals and never treats progress as committed success. Production errors do not become synthetic fallback records.

@@ -7,3 +7,7 @@ The initial candidate resources are Container Apps, PostgreSQL Flexible Server w
 Customer administrators authorize bootstrap and role assignments. Subsequent releases can use a customer-local federated GitHub deployment identity. Optional Azure Lighthouse delegation supports fleet operations separately from deployment, runtime, Entra and SharePoint permissions.
 
 Keep runtime identities separate from deployment/support access. Version each release and its client configuration. No mandatory Premium edge, messaging or workflow service is selected here.
+
+## Decisions and cost validation
+
+Read [resource modules](modules/README.md) and [environment parameters](environments/README.md). Measure runtime demand, database bytes/WAL/backups, model calls/tokens, synchronization traffic and retained telemetry before quoting customer costs. Earlier architecture comparisons are not this deployment bill. Select availability/recovery requirements explicitly and test restore; a configured backup is not proof of recovery.

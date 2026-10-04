@@ -6,11 +6,11 @@ This is a new modular-monolith scaffold. Read `README.md` and `docs/architecture
 
 ## Boundaries
 
-- Keep domain logic in `apps/backend/src/agr/modules/<module>/`.
+- Keep business logic in the public Python packages under `packages/`. `apps/api` and `apps/worker` are thin hosts, not business owners.
 - API routes, agent tools and background jobs call the same application use cases.
-- Put external-service adapters in `integrations/`; compose dependencies in `runtime/`. Domain code does not import API, runtime or provider SDKs.
-- Each module owns its writes. Cross-module operations use explicit public interfaces rather than reaching into another module's internals.
-- Introduce `domain/`, `application/` and persistence adapter files inside a module when actual implementation needs them. Do not generate empty architectural layers or generic base repositories.
+- Put concrete provider/persistence adapters in `packages/adapters/`; compose them in application bootstrap. Business packages do not import adapters, applications or provider SDKs.
+- Each business package owns its commands and write invariants. Follow `docs/architecture/package-dependencies.md`; never import another package's private implementation.
+- Packages have narrow public interfaces, dependency manifests and package-local tests when implemented. Do not create a package per entity, generic common package or empty architectural layers. Workspace tools are proposed, not configured.
 - Workflow-engine selection is open. Do not introduce LangGraph, Durable Functions or another engine merely to fill the scaffold.
 
 ## Data and authorization

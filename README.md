@@ -64,4 +64,8 @@ Read [the architecture](docs/architecture/overview.md), [the decision record](do
 
 ## Scaffold verification
 
-Git retains otherwise empty folders through `.gitkeep` files. These can be removed when implementation files occupy the folder. No application tests or CI checks exist yet; creating empty test folders does not establish test coverage.
+Every folder is retained by its local README. No application tests or CI checks exist yet; documented acceptance cases do not establish test coverage.
+
+## Folder specifications
+
+Each folder now contains a README explaining its responsibility and design decisions. Follow the [architecture index](docs/architecture/README.md), [use-case paths](docs/architecture/use-case-paths.md), [delivery sequence](docs/architecture/delivery-sequence.md) and [decision register](docs/decisions/README.md). These are specifications; no application code has been added.

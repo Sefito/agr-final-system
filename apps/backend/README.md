@@ -11,3 +11,7 @@ One Python application with HTTP and background execution entry points. `src/agr
 - `tests/contracts/`: HTTP/SSE contracts and shared behavior across adapter implementations.
 
 The API and agent use the same document and CRM operations. A worker is an entry point of this application, not an independently designed copy of its business logic.
+
+## Decisions and next gate
+
+Backend modules own their writes; the [module index](src/agr/modules/README.md) defines public responsibilities. [API](src/agr/api/README.md) and [runtime](src/agr/runtime/README.md) are entry/composition boundaries. Dependencies, packaging, migration runner and workflow engine are open. The first implemented slice must demonstrate authorization and commit/recovery behavior before general infrastructure abstractions are added.

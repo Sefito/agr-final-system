@@ -1,14 +1,14 @@
 # CRM
 
-Status: redesign authorized; initial entity model proposed.
+Status: initial entity scope confirmed; fields/command details proposed.
 
 ## Responsibility
 
 Own the agreed commercial records, commands, relationships and activity history. The UI and agent call one set of application commands. Documents owns file identity/content and is referenced through its public operations.
 
-## Initial proposal
+## Initial scope
 
-Start with organization/customer and project records sufficient for scope selection and document attachment. Add opportunities, contacts, tasks or funnel stages only when the agreed initial use cases need them. Do not reproduce the whole legacy mock-up as if it were implemented CRM scope.
+The first release includes organizations, projects and document attachments only. Opportunities, contacts, tasks and funnel stages are outside this release. Required fields, edit permissions and activity detail still need agreement; do not reproduce the legacy mock-up as implemented scope.
 
 ## Decisions
 
@@ -26,4 +26,4 @@ UI/agent enforce the same required fields and access; duplicate project requests
 
 ## Open decisions
 
-Agree the first entities and workflows, field-level sensitivity if actually needed, ownership of organization master data, external CRM import/export and retention. Choose persistence conventions with the backend/database implementation, not independently here.
+Agree organization/project fields and commands, field-level sensitivity if actually needed, ownership of organization master data, external CRM import/export and retention. Choose persistence conventions with the backend/database implementation, not independently here.

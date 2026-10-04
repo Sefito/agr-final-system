@@ -13,6 +13,10 @@ Statuses describe design intent, not implemented guarantees. Selected reflects c
 
 ## Remaining decisions
 
-Authentication topology and membership authority; initial CRM entities; simple file formats/upload readiness; source ACL mapping/write-back/deletion; retention; approved models/embedding space; business tariffs; Azure region/sizing/recovery requirements; migration/persistence tools; exact dependency pins and workflow engine.
+Authentication topology and membership authority; organization/project fields and CRM command details; simple file formats/upload readiness; source ACL mapping/write-back/deletion; retention; approved models/embedding space; business tariffs; Azure region/sizing/recovery requirements; migration/persistence tools; exact dependency pins and workflow engine.
 
 Package separation and task scheduling must not silently settle these product/security choices. Resolve them before the relevant implementation/real-client gate in the [delivery sequence](../architecture/delivery-sequence.md).
+
+## Functional baseline
+
+The [functional requirements draft](../requirements/functional-requirements.md) records confirmed scope, inherited rules, proposed behavior and optional SharePoint capabilities. First-release CRM scope is now confirmed: organizations, projects and document attachments only. Opportunity/contact/pipeline/task management is outside this release. Architecture decisions do not imply acceptance of the whole functional draft.

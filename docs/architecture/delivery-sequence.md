@@ -4,7 +4,7 @@ Status: proposed order. This documentation iteration completes analysis only; im
 
 ## 1. Establish workspace and package boundaries
 
-Select/pin uv, pnpm and Nx; introduce manifests, locks, public exports and import rules without enabling providers. Declare Python/schema/migration task dependencies and verify isolated package builds. Read package READMEs and confirm the initial CRM/use cases, simple file formats and upload destination. Resolve identity authority and authorization topology before exposing a real deployment. Keep tenant/user identity and scope explicit in every protected contract.
+Select/pin uv, pnpm and Nx; introduce manifests, locks, public exports and import rules without enabling providers. Declare Python/schema/migration task dependencies and verify isolated package builds. Read package READMEs and confirm organization/project fields and commands within the selected CRM scope, simple file formats and upload destination. Resolve identity authority and authorization topology before exposing a real deployment. Keep tenant/user identity and scope explicit in every protected contract.
 
 Output: agreed use-case contracts and policy decisions, not an engine choice inferred from folder names.
 

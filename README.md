@@ -51,3 +51,7 @@ These tools are recommended, not installed/configured. Exact versions are pinned
 Preserve document identity and provisionally keep platform bytes in PostgreSQL under the 25 MiB cap. Provide an authorized explorer/uploads; SharePoint is optional. Keep complex-file processing outside initial scope. LangGraph remains optional. Deploy in each customer's tenant/subscription with separate runtime, deployment and support access.
 
 Read the [monorepo design](docs/architecture/monorepo.md), [dependency rules](docs/architecture/package-dependencies.md), [delivery sequence](docs/architecture/delivery-sequence.md), [decision register](docs/decisions/README.md) and [repository contract](AGENTS.md).
+
+## Functional baseline
+
+Read the [functional requirements](docs/requirements/functional-requirements.md) for users, scope, business rules, use cases and acceptance scenarios. First-release CRM is limited to organizations, projects and document attachments. The full requirements document remains a draft for review.

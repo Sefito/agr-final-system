@@ -2,7 +2,9 @@
 
 Status: mixed-language monorepo design; no implementation or enforcement yet.
 
-Read in order:
+Read the [functional requirements](../requirements/functional-requirements.md) first for intended product behavior. Architecture explains implementation responsibility rather than defining additional product scope.
+
+Then read in order:
 
 1. [Overview](overview.md): packages versus apps versus deployments.
 2. [Monorepo design](monorepo.md): uv, pnpm, Nx, builds and releases.

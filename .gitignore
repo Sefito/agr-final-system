@@ -1,0 +1,42 @@
+# Local credentials and configuration
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+
+# Frontend and build output
+node_modules/
+dist/
+build/
+coverage/
+*.tsbuildinfo
+
+# Private customer material and runtime data
+/clients/private/
+/infra/azure/environments/private/
+/data/
+/artifacts/
+*.log
+*.sqlite
+*.sqlite3
+*.dump
+*.tfstate
+*.tfstate.*
+
+# Editor and operating system
+.DS_Store
+.idea/
+.vscode/

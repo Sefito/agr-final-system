@@ -14,6 +14,6 @@ Model calls, extraction and rendering finish outside long-held locks. The final 
 
 ## Consequences
 
-Cross-module SQL transactions are allowed without abandoning write ownership. Operation identity permits recovery after commit-before-response failure. A separate storage service or distributed workflow checkpoint cannot silently replace SQL atomicity; any future move requires a consistency/reconciliation design.
+Cross-package SQL transactions are allowed without abandoning write ownership. Operation identity permits recovery after commit-before-response failure. A separate storage service or distributed workflow checkpoint cannot silently replace SQL atomicity; any future move requires a consistency/reconciliation design.
 
 The transaction API, persistence library and actual command schemas remain open. No generic repository or distributed event infrastructure is mandated.

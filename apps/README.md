@@ -1,9 +1,9 @@
-# Applications
+# Runnable applications
 
-Status: two application boundaries selected.
+Status: three host responsibilities selected; deployment topology proposed.
 
-[backend](backend/README.md) owns authorized business operations and HTTP/job entry points. [web](web/README.md) owns user interactions and consumes public contracts.
+[api](api/README.md) serves HTTP/SSE. [worker](worker/README.md) executes jobs. [web](web/README.md) presents product flows. Applications compose reusable packages; they do not own copies of business rules.
 
-Decisions: backend behavior is shared by UI, agent and jobs; separate folders do not require separate business microservices. Each application will own its dependency manifest/lockfile when tooling is selected. Root task orchestration is open; do not copy the previous monorepo tooling automatically.
+API and worker can use the same image with different entry points. Worker responsibilities do not imply an additional always-on Azure service; scheduled jobs or a worker process may suffice. They are separate application projects because their lifecycle, entry points, resources and verification differ.
 
-Implement one end-to-end use case across both applications before adding generic shared packages. Do not create a third application for a worker that merely reuses backend entry points.
+Applications never import one another. Deployment, package and process boundaries are separate choices. See the [monorepo design](../docs/architecture/monorepo.md).

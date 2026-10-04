@@ -2,9 +2,9 @@
 
 Status: proposed order. This documentation iteration completes analysis only; implementation and live acceptance are pending.
 
-## 1. Establish ownership and policy
+## 1. Establish workspace and package boundaries
 
-Read module READMEs and confirm the initial CRM/use cases, simple file formats and upload destination. Resolve identity authority and authorization topology before exposing a real deployment. Keep tenant/user identity and scope explicit in every protected contract.
+Select/pin uv, pnpm and Nx; introduce manifests, locks, public exports and import rules without enabling providers. Declare Python/schema/migration task dependencies and verify isolated package builds. Read package READMEs and confirm the initial CRM/use cases, simple file formats and upload destination. Resolve identity authority and authorization topology before exposing a real deployment. Keep tenant/user identity and scope explicit in every protected contract.
 
 Output: agreed use-case contracts and policy decisions, not an engine choice inferred from folder names.
 

@@ -1,13 +1,9 @@
-# Shared frontend primitives
+# Web-local shared composition
 
-Status: boundary selected; component/query libraries open.
+Status: narrowed boundary after package separation.
 
-Own reusable presentation components, accessibility patterns, typed HTTP transport and streaming parsing. Keep feature-specific workflows and backend policy out of this folder.
+Keep app-specific glue here: session-aware query hooks, feature navigation helpers and application error presentation. Reusable UI primitives belong to `packages/ui/`; generic typed HTTP/event transport belongs to `packages/api-client/`.
 
-Decisions: generate HTTP types from the implemented API; maintain separate versioned stream event types; normalize safe error presentation; never log tokens/source content. Query cache identity includes actor and relevant scope/classification context. A cache key is not an authorization check.
+Do not create parallel copies of either package. Hooks compose public client/UI exports with the web session; backend business authorization remains server-side.
 
-Centralize session handling without allowing a generic API wrapper to silently retry every business mutation. Retries follow idempotency contracts. Cookie-based authentication requires agreed origin/CSRF handling.
-
-Acceptance: unknown events follow the compatibility policy; session change clears protected cached data; expired authentication is distinct from resource conflict/unavailability.
-
-Open: design system, query/forms libraries and schema generation tooling. Select them with concrete screens and contract needs.
+Actor/scope changes clear affected caches. Mutation retries use operation identities and declared contracts. Open: query/forms/session libraries and actual hooks; no implementation exists.

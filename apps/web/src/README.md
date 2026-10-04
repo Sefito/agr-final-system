@@ -1,7 +1,7 @@
-# Frontend source
+# Web application source
 
-Status: feature-based source boundary selected.
+[app](app/README.md) composes routes/session/providers. [features](features/README.md) owns product interactions. [shared](shared/README.md) owns web-specific glue.
 
-[app](app/README.md) composes the shell/routes/providers; [features](features/README.md) owns product flows; [shared](shared/README.md) contains reusable UI/transport primitives.
+Reusable presentation comes from `@agr/ui`; transport/types come from `@agr/api-client`. Features must not deep-import their private implementation. Backend domain policy is not copied into TypeScript.
 
-Keep backend-owned business rules on the backend. UI validation helps users but does not authorize operations. Tenant/user/scope changes invalidate affected client state. Source configuration can personalize presentation without altering access invariants.
+Client state is scoped by actor and relevant access context, with explicit invalidation on session change. The monorepo task graph rebuilds/checks web when client/UI/contracts change.

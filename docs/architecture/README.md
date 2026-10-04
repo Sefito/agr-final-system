@@ -1,27 +1,28 @@
 # Architecture index
 
-Status: analyzed folder responsibilities; no runtime implemented.
+Status: mixed-language monorepo design; no implementation or enforcement yet.
 
 Read in order:
 
-1. [Overview](overview.md): application shape and module ownership.
-2. [Use-case paths](use-case-paths.md): commands and cross-module handoffs.
-3. [Delivery sequence](delivery-sequence.md): step-by-step design and implementation gates.
-4. [Decision register](../decisions/README.md): statuses and open decisions.
+1. [Overview](overview.md): packages versus apps versus deployments.
+2. [Monorepo design](monorepo.md): uv, pnpm, Nx, builds and releases.
+3. [Dependency rules](package-dependencies.md): allowed imports and enforcement.
+4. [Use-case paths](use-case-paths.md): public operations and shared commits.
+5. [Delivery sequence](delivery-sequence.md): next design/implementation gates.
+6. [Decision register](../decisions/README.md): selected/provisional/open status.
 
-## Folder-level specifications
+## Folder specifications
 
 | Area | Specification |
 |---|---|
-| Backend package | [Source/package boundary](../../apps/backend/src/agr/README.md) |
-| Business ownership | [Module index](../../apps/backend/src/agr/modules/README.md) |
-| Transport | [API](../../apps/backend/src/agr/api/README.md) |
-| Process lifecycle | [Runtime](../../apps/backend/src/agr/runtime/README.md) |
-| External dependencies | [Integrations](../../apps/backend/src/agr/integrations/README.md) |
-| Frontend | [Source/features](../../apps/web/src/README.md) |
-| Database | [Migrations](../../db/migrations/README.md) |
+| Business and adapter packages | [Package index](../../packages/README.md) |
+| API host | [API](../../apps/api/README.md) |
+| Background host | [Worker](../../apps/worker/README.md) |
+| Frontend | [Web](../../apps/web/README.md) |
+| Cross-language contracts | [Contract index](../../contracts/README.md) |
+| Coordinated verification | [System tests](../../tests/system/README.md) |
+| Schema history | [Migrations](../../db/migrations/README.md) |
 | Customer resources | [Azure](../../infra/azure/README.md) |
 | Client profiles | [Configuration](../../clients/README.md) |
-| Verification | [Backend](../../apps/backend/tests/README.md), [frontend](../../apps/web/tests/README.md) |
 
-Local READMEs specify responsibility, selected/proposed decisions, acceptance scenarios and open questions. These documents define design intent; future checks must demonstrate the actual behavior.
+Every folder contains local design documentation. Package-local tests verify ownership; system tests verify collaboration. Empty source folders retained by READMEs are proposed package boundaries, not installed packages.

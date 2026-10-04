@@ -1,17 +1,17 @@
 # ADR 0001: Modular monolith with optional workflow engine
 
-Status: accepted for repository scaffolding.
+Status: modular-monolith decision retained; application-local module placement superseded by ADR 0006.
 
 ## Context
 
-The previous proof of concept accumulated large workflow files and overlapping orchestration/business state. Customer-owned Azure deployments, document identity and user-visible file structure must be preserved. The new scope excludes complex-file processing and permits CRM redesign.
+The previous proof of concept accumulated large workflow files and overlapping orchestration/business state. Customer-owned Azure deployment and document identity must be preserved. Complex files are outside initial scope and CRM redesign is allowed.
 
 ## Decision
 
-Use one Python backend organized by business module and one React/TypeScript frontend organized by feature. Separate transport, runtime composition and external integrations from module logic. Keep migrations and Azure infrastructure outside application source.
+Use a modular Python business architecture and a React/TypeScript frontend. UI, API, agent and worker share public commands. Do not mandate LangGraph or Durable Functions before evaluating durable execution.
 
-Do not introduce LangGraph or Durable Functions as a scaffold dependency. Evaluate durable execution using a complete use case before selecting an engine. Retaining LangGraph in an incremental legacy deployment is distinct from selecting it for this new repository.
+The initial application-local folder placement has been replaced by thin hosts and reusable packages in [ADR 0006](0006-monorepo-and-packages.md). Packaging does not require microservices.
 
 ## Consequences
 
-UI, agent and jobs share typed use cases and module-owned writes. Module boundaries require enforcement when implementation exists. We avoid independent service infrastructure per module, but still need explicit transaction, recovery and authorization contracts. Empty folders provide organization, not those guarantees.
+Enforce dependency/write ownership and shared transaction/recovery contracts. Package-local tests and cross-package verification must establish behavior; documentation and package naming alone do not.
